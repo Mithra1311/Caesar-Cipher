@@ -1,0 +1,13 @@
+Caesar Cipher – Java (Multithreaded)
+This project is a simple and beginner-friendly implementation of the Caesar Cipher in Java. It allows users to enter a message and a shift key to encrypt the text, and then automatically decrypts it back to the original message.
+The program uses multithreading by creating separate Encryptor and Decryptor classes that extend the Thread class. It also includes proper input validation, exception handling, and preserves uppercase and lowercase letters while
+leaving special characters unchanged.
+
+What this project demonstrates:
+Core Java concepts (OOP, classes, methods)
+Multithreading using Thread
+String manipulation using StringBuilder
+Modular arithmetic for character shifting
+Exception handling with try-catch-finally
+
+This project is great for understanding basic cryptography concepts and practicing Java programming fundamentals.
