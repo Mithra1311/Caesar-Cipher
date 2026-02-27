@@ -1,0 +1,245 @@
+#Main implementation
+import java.util.Scanner;
+class Encryptor extends Thread {
+    private String text;
+    private int shift;
+    private String encryptedText;
+    public Encryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        encryptedText = caesarCipher(text, shift);
+        System.out.println("Encrypted Text: " + encryptedText);
+    }
+    public String getEncryptedText() {
+        return encryptedText;
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        shift = shift % 26;
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+}
+class Decryptor extends Thread {
+    private String text;
+    private int shift;
+    public Decryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        System.out.println("Decrypted Text: " + caesarCipher(text, 26 - (shift % 26)));
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }}
+public class CaesarCipher {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter text: ");
+            String text = scanner.nextLine();            
+            if (text.isEmpty()) {
+                throw new IllegalArgumentException("Input text cannot be empty!");
+            }
+            System.out.print("Enter shift key (positive integer): ");
+            int shift = scanner.nextInt();
+            if (shift < 0) {
+                throw new IllegalArgumentException("Shift key must be a positive integer!");
+            }            
+            Encryptor encryptor = new Encryptor(text, shift);
+            encryptor.start();
+            encryptor.join();             
+            Decryptor decryptor = new Decryptor(encryptor.getEncryptedText(), shift);
+            decryptor.start();            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+import java.util.Scanner;
+class Encryptor extends Thread {
+    private String text;
+    private int shift;
+    private String encryptedText;
+    public Encryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        encryptedText = caesarCipher(text, shift);
+        System.out.println("Encrypted Text: " + encryptedText);
+    }
+    public String getEncryptedText() {
+        return encryptedText;
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        shift = shift % 26;
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+}
+#Decryption
+class Decryptor extends Thread {
+    private String text;
+    private int shift;
+    public Decryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        System.out.println("Decrypted Text: " + caesarCipher(text, 26 - (shift % 26)));
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }}
+public class CaesarCipher {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter text: ");
+            String text = scanner.nextLine();            
+            if (text.isEmpty()) {
+                throw new IllegalArgumentException("Input text cannot be empty!");
+            }
+            System.out.print("Enter shift key (positive integer): ");
+            int shift = scanner.nextInt();
+            if (shift < 0) {
+                throw new IllegalArgumentException("Shift key must be a positive integer!");
+            }            
+            Encryptor encryptor = new Encryptor(text, shift);
+            encryptor.start();
+            encryptor.join();             
+            Decryptor decryptor = new Decryptor(encryptor.getEncryptedText(), shift);
+            decryptor.start();            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+#Encryption
+import java.util.Scanner;
+class Encryptor extends Thread {
+    private String text;
+    private int shift;
+    private String encryptedText;
+    public Encryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        encryptedText = caesarCipher(text, shift);
+        System.out.println("Encrypted Text: " + encryptedText);
+    }
+    public String getEncryptedText() {
+        return encryptedText;
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        shift = shift % 26;
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+}
+class Decryptor extends Thread {
+    private String text;
+    private int shift;
+    public Decryptor(String text, int shift) {
+        this.text = text;
+        this.shift = shift;
+    }
+    @Override
+    public void run() {
+        System.out.println("Decrypted Text: " + caesarCipher(text, 26 - (shift % 26)));
+    }
+    private String caesarCipher(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) ((c - base + shift + 26) % 26 + base));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }}
+public class CaesarCipher {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter text: ");
+            String text = scanner.nextLine();            
+            if (text.isEmpty()) {
+                throw new IllegalArgumentException("Input text cannot be empty!");
+            }
+            System.out.print("Enter shift key (positive integer): ");
+            int shift = scanner.nextInt();
+            if (shift < 0) {
+                throw new IllegalArgumentException("Shift key must be a positive integer!");
+            }            
+            Encryptor encryptor = new Encryptor(text, shift);
+            encryptor.start();
+            encryptor.join();             
+            Decryptor decryptor = new Decryptor(encryptor.getEncryptedText(), shift);
+            decryptor.start();            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
